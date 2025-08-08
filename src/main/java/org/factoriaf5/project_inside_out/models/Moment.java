@@ -13,7 +13,7 @@ public class Moment {
     private final LocalDateTime updatedAt;
 
     public Moment(int id, String title, String description, Emotion emotion, LocalDate eventDate,
-                  LocalDateTime createdAt, LocalDateTime updatedAt) {
+            LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -21,6 +21,16 @@ public class Moment {
         this.eventDate = eventDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Moment(String title, String description, Emotion emotion, LocalDate eventDate) {
+        this.id = 0;
+        this.title = title;
+        this.description = description;
+        this.emotion = emotion;
+        this.eventDate = eventDate;
+        this.createdAt = null;
+        this.updatedAt = null;
     }
 
     public int getId() {

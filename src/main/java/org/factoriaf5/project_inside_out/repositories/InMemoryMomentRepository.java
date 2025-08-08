@@ -1,21 +1,33 @@
 package org.factoriaf5.project_inside_out.repositories;
 
 import org.factoriaf5.project_inside_out.models.Moment;
-
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 public class InMemoryMomentRepository implements MomentRepository {
-    private final List<Moment> moments = new ArrayList<>();
+    private final List<Moment> moments = new LinkedList<>();
+    private int counter = 1;
 
     @Override
-    public void save(Moment moment) {
-        moments.add(moment);
+    public Moment save(Moment moment) {
+        Moment newMoment = new Moment(
+            counter++,
+            moment.getTitle(),
+            moment.getDescription(),
+            moment.getEmotion(),
+            moment.getEventDate(),
+            LocalDateTime.now(),
+            LocalDateTime.now()
+        );
+
+        moments.add(newMoment);
+        return newMoment;
     }
 
     @Override
     public List<Moment> findAll() {
-        return new ArrayList<>(moments);
+        return new LinkedList<>(moments);
     }
 
     @Override
