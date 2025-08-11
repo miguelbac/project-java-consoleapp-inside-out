@@ -1,13 +1,17 @@
 package org.factoriaf5.project_inside_out.repositories;
 
+import org.factoriaf5.project_inside_out.db.MomentDB;
 import org.factoriaf5.project_inside_out.models.Moment;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.List;
 
 public class InMemoryMomentRepository implements MomentRepository {
-    private final List<Moment> moments = new LinkedList<>();
+    private final MomentDB db;
     private int counter = 1;
+
+    public InMemoryMomentRepository(MomentDB db) {
+        this.db = db;
+    }
 
     @Override
     public Moment save(Moment moment) {
@@ -20,18 +24,17 @@ public class InMemoryMomentRepository implements MomentRepository {
             LocalDateTime.now(),
             LocalDateTime.now()
         );
-
-        moments.add(newMoment);
+        db.add(newMoment);
         return newMoment;
     }
 
     @Override
     public List<Moment> findAll() {
-        return new LinkedList<>(moments);
+        return db.getAll();
     }
 
     @Override
     public void deleteById(int id) {
-        moments.removeIf(moment -> moment.getId() == id);
+        db.deleteById(id);
     }
 }

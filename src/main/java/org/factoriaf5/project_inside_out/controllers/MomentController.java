@@ -53,6 +53,15 @@ public class MomentController {
     private void deleteMoment() {
         try {
             int id = menu.readInt("Ingresa el identificador del momento: ");
+
+            boolean exists = service.getAllMoments().stream()
+                    .anyMatch(moment -> moment.getId() == id);
+
+            if (!exists) {
+                menu.printError("No existe ningún momento con el ID: " + id);
+                return;
+            }
+
             service.deleteMoment(id);
             menu.printMessage("Momento vivido eliminado correctamente.");
         } catch (Exception e) {
