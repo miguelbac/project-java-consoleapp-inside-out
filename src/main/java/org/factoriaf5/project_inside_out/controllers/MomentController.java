@@ -25,7 +25,7 @@ public class MomentController {
             switch (option) {
                 case 1 -> addMoment();
                 case 2 -> showAllMoments();
-                case 3 -> menu.printMessage("Función no implementada aún.");
+                case 3 -> deleteMoment();
                 case 4 -> menu.printMessage("Función no implementada aún.");
                 case 5 -> exitApplication();
                 default -> menu.printMessage("Opción inválida. Por favor, intenta de nuevo.");
@@ -40,12 +40,23 @@ public class MomentController {
             String description = menu.readLine("Ingrese la descripción: ");
             int emotionOption = getValidEmotion();
 
-            MomentDTO dto = new MomentDTO(title, description, emotionOption, eventDate.format(InputValidator.getFormatter()));
+            MomentDTO dto = new MomentDTO(title, description, emotionOption,
+                    eventDate.format(InputValidator.getFormatter()));
             service.addMoment(dto);
-            
+
             menu.printMessage("Momento vivido añadido correctamente.");
         } catch (Exception e) {
             menu.printError("Error al añadir el momento: " + e.getMessage());
+        }
+    }
+
+    private void deleteMoment() {
+        try {
+            int id = menu.readInt("Ingresa el identificador del momento: ");
+            service.deleteMoment(id);
+            menu.printMessage("Momento vivido eliminado correctamente.");
+        } catch (Exception e) {
+            menu.printError("Error al eliminar el momento: " + e.getMessage());
         }
     }
 

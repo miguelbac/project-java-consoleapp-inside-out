@@ -23,4 +23,8 @@ public class MomentService {
         return repository.findAll();
     }
 
+    public void deleteMoment(int id) {
+        repository.deleteById(id);
+    }
+
 }
