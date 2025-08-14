@@ -100,6 +100,9 @@ public class MomentController {
 
     private void exitApplication() {
         menu.printMessage("¡Hasta la próxima!");
+        if ("test".equals(System.getProperty("environment"))) {
+            throw new RuntimeException("System.exit() called");
+        }
         System.exit(0);
     }
 

@@ -25,6 +25,11 @@ public class MomentDTO {
     public int getEmotionOption() { return emotionOption; }
     public void setEmotionOption(int emotionOption) { this.emotionOption = emotionOption; }
 
+    // Alias para compatibilidad con tests que usen getEmotion()
+    public int getEmotion() { 
+        return emotionOption; 
+    }
+
     public String getEventDate() { return eventDate; }
     public void setEventDate(String eventDate) { this.eventDate = eventDate; }
 }
