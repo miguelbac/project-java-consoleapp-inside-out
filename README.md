@@ -28,12 +28,12 @@ Para ejecutar este proyecto necesitas:
 
 1️⃣ **Clonar el repositorio:**  
 \`\`\`bash
-https://github.com/miguelbac/project-java-consoleapp-inside-out.git
+git clone https://github.com/miguelbac/project-java-consoleapp-inside-out.git
 \`\`\`
 
 2️⃣ **Acceder al directorio del proyecto:**  
 \`\`\`bash
-cd project_inside_out
+cd project-java-consoleapp-inside-out
 \`\`\`
 
 3️⃣ **Compilar el proyecto:**  
@@ -76,5 +76,5 @@ mvn test
 
 ## 👥 Autores  
 
-- Miguel Ballesteros
-- Saúl Otero
+- **Miguel Ballesteros**
+- **Saúl Otero**
