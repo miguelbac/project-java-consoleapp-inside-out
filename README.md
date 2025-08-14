@@ -1,159 +1,69 @@
-# Project Inside Out
+📓 Mi Diario
+📖 Descripción
 
-# Instrucciones
-Se os ha encargado la creación de una aplicación de consola con la cual el usuario podrá gestionar momentos vividos, Mi Diario. Cada momento tendrá una emoción asignada junto con la fecha de cuando ocurrio.
+Mi Diario es una aplicación de consola en Java que permite registrar, consultar, eliminar y filtrar momentos vividos, cada uno asociado a una emoción y una fecha.
+Incluye funcionalidades para:
 
-Cada momento vivído tendrá un identificador, un título, una descripción, una emoción, fecha del momento, fecha de creación, fecha de modificación.
+Añadir nuevos momentos con título, descripción, emoción y fecha.
 
-Listado de emociones:
-1. Alegría
-2. Tristeza
-3. Ira
-4. Asco
-5. Miedo
-6. Ansiedad
-7. Envidia
-8. Vergüenza
-9. Aburrimiento
-10. Nostalgia
+Listar todos los momentos registrados.
 
-Por cada historia de usuario se deberán redactar los criterios de aceptación.
+Eliminar momentos por su identificador.
 
-# Historias de usuario
-1. COMO usuario QUIERO añadir un momento vivido PARA poder visualisarlo cuando lo necesite recordar
+Filtrar por emoción o por fecha.
 
-2. COMO usuario QUIERO recuperar la lista de lo momentos vividos registrados PARA poder repasarlos
+📋 Pre-requisitos
 
-3. COMO usuario QUIERO suprimir un momento vivido PARA evitar duplicados y mantener la lista de momentos organizada
+Para ejecutar este proyecto necesitas:
 
-4. COMO usuario QUIERO obtener los momentos vividos según su emoción PARA poder visualizarlos
+Java 21
 
-5. COMO usuario QUIERO obtener los momentos vividos en un mes determinado
+Maven 3.6.3 o superior
 
-6. COMO usuario QUIERO salir del programa PARA poder iniciar otro
+Un IDE compatible con Maven (por ejemplo: IntelliJ IDEA, Eclipse, VS Code con extensión Java)
 
-# Ejemplo de interacción con la consola
+⚙️ Instalación
 
-```
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 1
+Clonar el repositorio:
 
-Ingrese el título: Un día en el parque de atracciones
-Ingresa la fecha (dd/mm/year): 01/05/2024
-Ingrese la descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus.
+git clone https://github.com/usuario/mi-diario.git
 
-Selecciona una emoción:
-1. Alegría
-2. Tristeza
-3. Ira
-4. Asco
-5. Miedo
-6. Ansiedad
-7. Envidia
-8. Vergüenza
-9. Aburrimiento
-10. Nostalgia
-Ingrese su opción: 1
-Momento vivído añadido correctamente.
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 2
+Acceder al directorio del proyecto:
 
-Lista de momentos vividos:
-1. Ocurrio el: 01/01/2024. Título: Un día en el parque de atracciones. Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus. Emoción: Alegría
+cd mi-diario
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 3
 
-Ingresa el identificador del momento: 1
-Momento vivído eliminado correctamente.
+Compilar el proyecto:
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 4
+mvn clean install
 
-Filtar por ...:
-1. Emoción
-2. Fecha
-Ingrese una opción: 1
+▶️ Ejecución
 
-Selecciona una emoción:
-1. Alegría
-2. Tristeza
-3. Ira
-4. Asco
-5. Miedo
-6. Ansiedad
-7. Envidia
-8. Vergüenza
-9. Aburrimiento
-10. Nostalgia
-Ingrese su opción: 1
+Para ejecutar la aplicación desde la consola:
 
-Lista de momentos vividos:
-1. Ocurrio el: 01/01/2024. Título: Un día en el parque de atracciones. Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus. Emoción: Alegría
+mvn exec:java -Dexec.mainClass="org.factoriaf5.project_inside_out.Main"
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 4
+🧪 Ejecución de tests
 
-Filtrar por ...:
-1. Emoción
-2. Fecha
-Ingrese una opción: 2
+Para ejecutar los tests:
 
-Ingrese la fecha (dd/mm/year): 01/01/2024
+mvn test
 
-Lista de momentos vividos:
-1. Ocurrio el: 01/01/2024. Título: Un día en el parque de atracciones. Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed eros vel massa scelerisque convallis interdum ut purus. Emoción: Alegría
 
-My diario:
-1. Añadir momento
-2. Ver todos los momentos disponibles
-3. Eliminar un momento
-4. Filtrar los momentos
-5. Salir
-Seleccione una opción: 5
+Dependencias de testing:
 
-Hasta la próxima!!!
-```
+JUnit 5.6.0
 
-# 🏁 Rúbrica de evaluación
-- <strong>Interfaz de usuario</strong>
-    - La interfaz de usuario permite añadir (10%)
-    - La interfaz de usuario permite visualizar todos los momentos (10%)
-    - La interfaz de usuario permite eliminar un momento (10%)
-    - La interfaz de usuario permite filtrar por emoción (10%)
-    - La interfaz de usuario permite filtrar por fecha (10%)
+Mockito 5.18.0
 
-- <strong>Persistencia de datos</strong>
-    - Se hace un uso adecuado de la interface List\<E>. (10%)
+Hamcrest 2.2
 
-- <strong>Código y Buenas Prácticas</strong>
-    - Tests de cobertura mínimo un 70% (20%)
-    - El código está bien estructurado (10%)
-    - Correcta separación de responsabiidades. S de "SOLID" (10%)
+<img width="404" height="696" alt="image" src="https://github.com/user-attachments/assets/bde3b5f9-92eb-45bf-8fc1-186cf86691b1" />
 
+📊 Diagramas
+
+👥 Autores
+
+Miguel Ballesteros
+Saúl Otero
