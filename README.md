@@ -64,7 +64,7 @@ mvn test
 - **Mockito 5.18.0**  
 - **Hamcrest 2.2**  
 
-> 📸 Aquí añadir **captura de la ejecución de tests**.
+<img width="404" height="696" alt="image" src="https://github.com/user-attachments/assets/64b7fcbf-a04b-4b53-90b3-418e23931be4" />
 
 ---
 
