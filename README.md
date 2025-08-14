@@ -28,7 +28,7 @@ Para ejecutar este proyecto necesitas:
 
 1️⃣ **Clonar el repositorio:**  
 \`\`\`bash
-git clone https://github.com/usuario/project_inside_out.git
+https://github.com/miguelbac/project-java-consoleapp-inside-out.git
 \`\`\`
 
 2️⃣ **Acceder al directorio del proyecto:**  
