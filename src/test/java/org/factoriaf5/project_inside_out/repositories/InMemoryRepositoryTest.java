@@ -1,22 +1,18 @@
-package org.factoriaf5.repositories;
+package org.factoriaf5.project_inside_out.repositories;
 
-import org.factoriaf5.project_inside_out.db.MomentDB;
+import org.factoriaf5.project_inside_out.models.Emotion;
 import org.factoriaf5.project_inside_out.models.Moment;
+import org.factoriaf5.project_inside_out.repositories.InMemoryMomentRepository;
+import org.factoriaf5.project_inside_out.db.MomentDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.time.LocalDate;
-
-
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.factoriaf5.project_inside_out.repositories.InMemoryMomentRepository;
-import org.factoriaf5.project_inside_out.models.Emotion;
-
-
 
 class InMemoryMomentRepositoryTest {
 
@@ -26,10 +22,22 @@ class InMemoryMomentRepositoryTest {
     // Fake DB para test
     static class FakeMomentDB extends MomentDB {
         private final List<Moment> moments = new LinkedList<>();
+        private int lastId = 0;
 
         @Override
         public void add(Moment moment) {
-            moments.add(moment);
+            lastId++;
+            // Creamos un nuevo Moment con ID asignado
+            Moment momentWithId = new Moment(
+                lastId,
+                moment.getTitle(),
+                moment.getDescription(),
+                moment.getEmotion(),
+                moment.getEventDate(),
+                LocalDateTime.now(), // createdAt
+                LocalDateTime.now()  // updatedAt
+            );
+            moments.add(momentWithId);
         }
 
         @Override

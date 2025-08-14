@@ -1,4 +1,4 @@
-package org.factoriaf5.views;
+package org.factoriaf5.project_inside_out.views;
 
 import org.factoriaf5.project_inside_out.models.Emotion;
 import org.factoriaf5.project_inside_out.models.Moment;
