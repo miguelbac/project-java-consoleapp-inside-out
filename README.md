@@ -70,8 +70,99 @@ mvn test
 
 ## 📊 Diagramas  
 
-> 📌 Aquí añadir el **diagrama de clases** del proyecto.
+```mermaid
+classDiagram
+    %% Clases principales
+    class MomentController {
+        - ConsoleMenu menu
+        - MomentService service
+        + run()
+        - addMoment()
+        - deleteMoment()
+        - showAllMoments()
+        - filterMoments()
+        - exitApplication()
+        - getValidDate()
+        - getValidEmotion()
+    }
 
+    class MomentService {
+        - MomentRepository repository
+        + addMoment(MomentDTO) : Moment
+        + getAllMoments() : List~Moment~
+        + deleteMoment(int)
+        + getMomentsByEmotion(int) : List~Moment~
+        + getMomentsByMonthYear(int, int) : List~Moment~
+    }
+
+    class MomentRepository {
+        <<interface>>
+        + save(Moment) : Moment
+        + findAll() : List~Moment~
+        + deleteById(int)
+    }
+
+    class InMemoryMomentRepository {
+        - MomentDB db
+        + save(Moment) : Moment
+        + findAll() : List~Moment~
+        + deleteById(int)
+    }
+
+    class MomentDB {
+        - List~Moment~ moments
+        + add(Moment)
+        + getAll() : List~Moment~
+        + deleteById(int) : boolean
+    }
+
+    class Moment {
+        - int id
+        - String title
+        - String description
+        - LocalDate eventDate
+        - Emotion emotion
+    }
+
+    class MomentDTO {
+        - String title
+        - String description
+        - int emotionOption
+        - String eventDate
+    }
+
+    class MomentMapper {
+        + fromDTO(MomentDTO) : Moment
+    }
+
+    class ConsoleMenu {
+        + showMainMenu()
+        + printEmotionMenu()
+        + readInt(String) : int
+        + readLine(String) : String
+        + printMessage(String)
+        + printError(String)
+        + printMoments(List~Moment~)
+    }
+
+    class InputValidator {
+        + parseDate(String) : LocalDate
+        + isValidEmotionOption(int) : boolean
+        + getFormatter() : DateTimeFormatter
+    }
+
+    %% Relaciones
+    MomentController --> ConsoleMenu
+    MomentController --> MomentService
+    MomentService --> MomentRepository
+    InMemoryMomentRepository --> MomentDB
+    MomentService --> MomentMapper
+    MomentMapper --> MomentDTO
+    MomentMapper --> Moment
+    MomentService --> Moment
+    MomentRepository <|.. InMemoryMomentRepository
+
+```
 ---
 
 ## 👥 Autores  
