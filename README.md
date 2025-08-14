@@ -1,69 +1,80 @@
-📓 Mi Diario
-📖 Descripción
+# 📓 Project Inside Out
 
-Mi Diario es una aplicación de consola en Java que permite registrar, consultar, eliminar y filtrar momentos vividos, cada uno asociado a una emoción y una fecha.
-Incluye funcionalidades para:
+---
 
-Añadir nuevos momentos con título, descripción, emoción y fecha.
+## 📖 Descripción  
 
-Listar todos los momentos registrados.
+**Project Inside Out** es una aplicación de consola en Java que permite registrar, consultar, eliminar y filtrar momentos vividos, cada uno asociado a una emoción y una fecha.  
 
-Eliminar momentos por su identificador.
+**Funcionalidades principales:**  
+- Añadir nuevos momentos con título, descripción, emoción y fecha.  
+- Listar todos los momentos registrados.  
+- Eliminar momentos por su identificador.  
+- Filtrar por emoción o por fecha.  
 
-Filtrar por emoción o por fecha.
+---
 
-📋 Pre-requisitos
+## 📋 Pre-requisitos  
 
-Para ejecutar este proyecto necesitas:
+Para ejecutar este proyecto necesitas:  
 
-Java 21
+- **Java 21**  
+- **Maven 3.6.3** o superior  
+- Un IDE compatible con Maven (por ejemplo: IntelliJ IDEA, Eclipse, VS Code con extensión Java)  
 
-Maven 3.6.3 o superior
+---
 
-Un IDE compatible con Maven (por ejemplo: IntelliJ IDEA, Eclipse, VS Code con extensión Java)
+## ⚙️ Instalación  
 
-⚙️ Instalación
+1️⃣ **Clonar el repositorio:**  
+\`\`\`bash
+git clone https://github.com/usuario/project_inside_out.git
+\`\`\`
 
-Clonar el repositorio:
+2️⃣ **Acceder al directorio del proyecto:**  
+\`\`\`bash
+cd project_inside_out
+\`\`\`
 
-git clone https://github.com/usuario/mi-diario.git
-
-
-Acceder al directorio del proyecto:
-
-cd mi-diario
-
-
-Compilar el proyecto:
-
+3️⃣ **Compilar el proyecto:**  
+\`\`\`bash
 mvn clean install
+\`\`\`
 
-▶️ Ejecución
+---
 
-Para ejecutar la aplicación desde la consola:
+## ▶️ Ejecución  
 
+Para ejecutar la aplicación desde la consola:  
+\`\`\`bash
 mvn exec:java -Dexec.mainClass="org.factoriaf5.project_inside_out.Main"
+\`\`\`
 
-🧪 Ejecución de tests
+---
 
-Para ejecutar los tests:
+## 🧪 Ejecución de tests  
 
+Para ejecutar los tests:  
+\`\`\`bash
 mvn test
+\`\`\`
 
+**Dependencias de testing:**  
+- **JUnit 5.6.0**  
+- **Mockito 5.18.0**  
+- **Hamcrest 2.2**  
 
-Dependencias de testing:
+> 📸 Aquí añadir **captura de la ejecución de tests**.
 
-JUnit 5.6.0
+---
 
-Mockito 5.18.0
+## 📊 Diagramas  
 
-Hamcrest 2.2
+> 📌 Aquí añadir el **diagrama de clases** del proyecto.
 
-<img width="404" height="696" alt="image" src="https://github.com/user-attachments/assets/bde3b5f9-92eb-45bf-8fc1-186cf86691b1" />
+---
 
-📊 Diagramas
+## 👥 Autores  
 
-👥 Autores
-
-Miguel Ballesteros
-Saúl Otero
+- Miguel Ballesteros
+- Saúl Otero
