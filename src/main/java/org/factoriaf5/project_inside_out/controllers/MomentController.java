@@ -26,7 +26,7 @@ public class MomentController {
                 case 1 -> addMoment();
                 case 2 -> showAllMoments();
                 case 3 -> deleteMoment();
-                case 4 -> menu.printMessage("Función no implementada aún.");
+                case 4 -> filterMoments();
                 case 5 -> exitApplication();
                 default -> menu.printMessage("Opción inválida. Por favor, intenta de nuevo.");
             }
@@ -101,5 +101,42 @@ public class MomentController {
     private void exitApplication() {
         menu.printMessage("¡Hasta la próxima!");
         System.exit(0);
+    }
+
+    private void filterMoments() {
+        menu.printMessage("Filtrar por ...:");
+        menu.printMessage("1. Emoción");
+        menu.printMessage("2. Fecha");
+        int filterOption = menu.readInt("Ingrese una opción: ");
+
+        switch (filterOption) {
+            case 1 -> {
+                menu.printEmotionMenu();
+                int emotionOption = getValidEmotion();
+                List<Moment> filteredByEmotion = service.getMomentsByEmotion(emotionOption);
+                menu.printMoments(filteredByEmotion);
+            }
+            case 2 -> {
+                int month;
+                do {
+                    month = menu.readInt("Ingrese el mes (1-12): ");
+                    if (month < 1 || month > 12) {
+                        menu.printError("Mes inválido. Debe estar entre 1 y 12.");
+                    }
+                } while (month < 1 || month > 12);
+
+                int year;
+                do {
+                    year = menu.readInt("Ingrese el año (yyyy): ");
+                    if (String.valueOf(year).length() != 4) {
+                        menu.printError("Año inválido. Debe tener 4 dígitos.");
+                    }
+                } while (String.valueOf(year).length() != 4);
+
+                List<Moment> filteredByMonthYear = service.getMomentsByMonthYear(month, year);
+                menu.printMoments(filteredByMonthYear);
+            }
+            default -> menu.printError("Opción inválida.");
+        }
     }
 }

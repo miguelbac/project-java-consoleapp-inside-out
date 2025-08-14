@@ -27,4 +27,17 @@ public class MomentService {
         repository.deleteById(id);
     }
 
+    public List<Moment> getMomentsByEmotion(int emotionOption) {
+        return repository.findAll().stream()
+                .filter(moment -> moment.getEmotion().ordinal() + 1 == emotionOption)
+                .toList();
+    }
+
+    public List<Moment> getMomentsByMonthYear(int month, int year) {
+        return repository.findAll().stream()
+                .filter(moment -> moment.getEventDate().getMonthValue() == month
+                        && moment.getEventDate().getYear() == year)
+                .toList();
+    }
+
 }
