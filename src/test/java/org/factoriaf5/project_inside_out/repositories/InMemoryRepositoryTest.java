@@ -2,7 +2,6 @@ package org.factoriaf5.project_inside_out.repositories;
 
 import org.factoriaf5.project_inside_out.models.Emotion;
 import org.factoriaf5.project_inside_out.models.Moment;
-import org.factoriaf5.project_inside_out.repositories.InMemoryMomentRepository;
 import org.factoriaf5.project_inside_out.db.MomentDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ class InMemoryMomentRepositoryTest {
     private InMemoryMomentRepository repository;
     private FakeMomentDB db;
 
-    // Fake DB para test
     static class FakeMomentDB extends MomentDB {
         private final List<Moment> moments = new LinkedList<>();
         private int lastId = 0;
@@ -27,15 +25,14 @@ class InMemoryMomentRepositoryTest {
         @Override
         public void add(Moment moment) {
             lastId++;
-            // Creamos un nuevo Moment con ID asignado
             Moment momentWithId = new Moment(
                 lastId,
                 moment.getTitle(),
                 moment.getDescription(),
                 moment.getEmotion(),
                 moment.getEventDate(),
-                LocalDateTime.now(), // createdAt
-                LocalDateTime.now()  // updatedAt
+                LocalDateTime.now(),
+                LocalDateTime.now()
             );
             moments.add(momentWithId);
         }

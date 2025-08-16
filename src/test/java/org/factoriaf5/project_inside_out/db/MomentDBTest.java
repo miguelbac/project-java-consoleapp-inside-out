@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.factoriaf5.project_inside_out.db.MomentDB;
 import java.time.LocalDate;
 import org.factoriaf5.project_inside_out.models.Emotion;
 
@@ -52,7 +51,6 @@ class MomentDBTest {
         momentDB.add(moment);
         List<Moment> copy = momentDB.getAll();
         assertEquals(1, copy.size());
-        // Modificar la lista externa no debe afectar al DB interno
         copy.clear();
         assertEquals(1, momentDB.getAll().size());
     }
