@@ -64,7 +64,7 @@ mvn test
 - **Mockito 5.18.0**  
 - **Hamcrest 2.2**  
 
-<img width="404" height="696" alt="image" src="https://github.com/user-attachments/assets/64b7fcbf-a04b-4b53-90b3-418e23931be4" />
+<img width="337" height="466" alt="image" src="https://github.com/user-attachments/assets/7ec7da28-75bb-4399-bf64-579be5dd2a6c" />
 
 ---
 
