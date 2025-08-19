@@ -2,17 +2,17 @@ package org.factoriaf5.project_inside_out;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.io.ByteArrayInputStream;
 
-/**
- * Unit test for simple App.
- */
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 class AppTest {
-    /**
-     * Rigorous Test.
-     */
+
     @Test
-    void testApp() {
-        assertEquals(1, 1);
+    void main_runsWithoutErrors_whenUserSelectsExit() {
+        String simulatedInput = "5\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        assertDoesNotThrow(() -> App.main(new String[]{}));
     }
 }

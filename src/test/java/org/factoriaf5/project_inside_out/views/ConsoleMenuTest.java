@@ -13,6 +13,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0fc46504456644adfbf9072bf0c67025eaf6d4a3
 
 class ConsoleMenuTest {
 
