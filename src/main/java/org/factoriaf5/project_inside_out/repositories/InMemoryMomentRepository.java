@@ -22,7 +22,8 @@ public class InMemoryMomentRepository implements MomentRepository {
             moment.getEmotion(),
             moment.getEventDate(),
             LocalDateTime.now(),
-            LocalDateTime.now()
+            LocalDateTime.now(),
+            moment.isGood()
         );
         db.add(newMoment);
         return newMoment;

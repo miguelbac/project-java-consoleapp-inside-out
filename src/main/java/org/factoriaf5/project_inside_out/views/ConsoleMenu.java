@@ -69,22 +69,24 @@ public class ConsoleMenu {
     }
 
     public void printMoments(List<Moment> moments) {
-        if (moments.isEmpty()) {
-            System.out.println("No hay momentos guardados.");
-            return;
-        }
-
-        System.out.println("Lista de momentos vividos:");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        for (Moment moment : moments) {
-            System.out.printf("%d. Ocurrió el: %s. Título: %s. Descripción: %s. Emoción: %s%n",
-                    moment.getId(),
-                    moment.getEventDate().format(formatter),
-                    moment.getTitle(),
-                    moment.getDescription(),
-                    moment.getEmotion()
-            );
-        }
+    if (moments.isEmpty()) {
+        System.out.println("No hay momentos guardados.");
+        return;
     }
+
+    System.out.println("Lista de momentos vividos:");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    for (Moment moment : moments) {
+        System.out.printf("%d. Ocurrió el: %s. Título: %s. Descripción: %s. Emoción: %s. Tipo: %s%n",
+                moment.getId(),
+                moment.getEventDate().format(formatter),
+                moment.getTitle(),
+                moment.getDescription(),
+                moment.getEmotion(),
+                moment.isGood() ? "BUENO" : "MALO"
+        );
+    }
+}
+
 }

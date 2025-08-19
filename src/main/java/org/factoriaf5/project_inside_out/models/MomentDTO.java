@@ -5,17 +5,21 @@ public class MomentDTO {
     private String description;
     private int emotionOption;
     private String eventDate;
+    private boolean isGood;
 
-    public MomentDTO() {}
-
-    public MomentDTO(String title, String description, int emotionOption, String eventDate) {
+    public MomentDTO(String title, String description, int emotionOption, String eventDate, boolean isGood) {
         this.title = title;
         this.description = description;
         this.emotionOption = emotionOption;
         this.eventDate = eventDate;
+        this.isGood = isGood;
     }
 
-    // Getters y setters
+    public boolean isGood() {
+        return isGood;
+    }
+
+
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 
@@ -25,7 +29,6 @@ public class MomentDTO {
     public int getEmotionOption() { return emotionOption; }
     public void setEmotionOption(int emotionOption) { this.emotionOption = emotionOption; }
 
-    // Alias para compatibilidad con tests que usen getEmotion()
     public int getEmotion() { 
         return emotionOption; 
     }

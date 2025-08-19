@@ -11,9 +11,10 @@ public class Moment {
     private final LocalDate eventDate;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
+    private final boolean isGood; // <-- nuevo campo
 
     public Moment(int id, String title, String description, Emotion emotion, LocalDate eventDate,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
+                  LocalDateTime createdAt, LocalDateTime updatedAt, boolean isGood) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -21,16 +22,15 @@ public class Moment {
         this.eventDate = eventDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.isGood = isGood;
     }
 
-    public Moment(String title, String description, Emotion emotion, LocalDate eventDate) {
-        this.id = 0;
-        this.title = title;
-        this.description = description;
-        this.emotion = emotion;
-        this.eventDate = eventDate;
-        this.createdAt = null;
-        this.updatedAt = null;
+    public Moment(String title, String description, Emotion emotion, LocalDate eventDate, boolean isGood) {
+        this(0, title, description, emotion, eventDate, null, null, isGood);
+    }
+
+    public boolean isGood() {
+        return isGood;
     }
 
     public int getId() {

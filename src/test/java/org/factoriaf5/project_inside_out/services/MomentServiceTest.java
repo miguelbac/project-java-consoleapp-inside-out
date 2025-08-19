@@ -12,7 +12,6 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-import org.factoriaf5.project_inside_out.services.MomentService;
 
 class MomentServiceTest {
 

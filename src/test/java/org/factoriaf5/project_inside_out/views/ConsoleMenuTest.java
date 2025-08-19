@@ -13,8 +13,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-import org.factoriaf5.project_inside_out.views.ConsoleMenu;
-
 
 class ConsoleMenuTest {
 

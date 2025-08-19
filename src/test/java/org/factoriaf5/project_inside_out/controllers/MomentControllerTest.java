@@ -27,8 +27,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.Mockito.*;
 
-import org.factoriaf5.project_inside_out.controllers.MomentController;
-
 
 class MomentControllerTest {
 

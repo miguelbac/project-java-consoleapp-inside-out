@@ -2,7 +2,6 @@ package org.factoriaf5.project_inside_out.repositories;
 
 import org.factoriaf5.project_inside_out.models.Emotion;
 import org.factoriaf5.project_inside_out.models.Moment;
-import org.factoriaf5.project_inside_out.repositories.InMemoryMomentRepository;
 import org.factoriaf5.project_inside_out.db.MomentDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

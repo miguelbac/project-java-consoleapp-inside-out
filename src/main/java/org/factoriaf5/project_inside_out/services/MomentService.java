@@ -40,4 +40,10 @@ public class MomentService {
                 .toList();
     }
 
+    public List<Moment> getMomentsByType(boolean isGood) {
+        return repository.findAll().stream()
+                .filter(moment -> moment.isGood() == isGood)
+                .toList();
+    }
+
 }

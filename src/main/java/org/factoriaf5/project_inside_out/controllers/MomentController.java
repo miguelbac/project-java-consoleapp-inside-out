@@ -40,14 +40,28 @@ public class MomentController {
             String description = menu.readLine("Ingrese la descripción: ");
             int emotionOption = getValidEmotion();
 
+            boolean isGood = getValidMomentType();
+
             MomentDTO dto = new MomentDTO(title, description, emotionOption,
-                    eventDate.format(InputValidator.getFormatter()));
+                    eventDate.format(InputValidator.getFormatter()), isGood);
+
             service.addMoment(dto);
 
             menu.printMessage("Momento vivido añadido correctamente.");
         } catch (Exception e) {
             menu.printError("Error al añadir el momento: " + e.getMessage());
         }
+    }
+
+    private boolean getValidMomentType() {
+        int option;
+        do {
+            option = menu.readInt("¿Es un buen momento (1) o un mal momento (2)?: ");
+            if (option != 1 && option != 2) {
+                menu.printError("Debe introducir 1 (bueno) o 2 (malo).");
+            }
+        } while (option != 1 && option != 2);
+        return option == 1;
     }
 
     private void deleteMoment() {
@@ -110,6 +124,8 @@ public class MomentController {
         menu.printMessage("Filtrar por ...:");
         menu.printMessage("1. Emoción");
         menu.printMessage("2. Fecha");
+        menu.printMessage("3. Buenos/Malos");
+
         int filterOption = menu.readInt("Ingrese una opción: ");
 
         switch (filterOption) {
@@ -138,6 +154,11 @@ public class MomentController {
 
                 List<Moment> filteredByMonthYear = service.getMomentsByMonthYear(month, year);
                 menu.printMoments(filteredByMonthYear);
+            }
+            case 3 -> {
+                boolean isGood = getValidMomentType();
+                List<Moment> filtered = service.getMomentsByType(isGood);
+                menu.printMoments(filtered);
             }
             default -> menu.printError("Opción inválida.");
         }
