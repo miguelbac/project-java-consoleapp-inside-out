@@ -4,6 +4,7 @@ import org.factoriaf5.project_inside_out.models.MomentDTO;
 import org.factoriaf5.project_inside_out.models.Moment;
 import org.factoriaf5.project_inside_out.services.MomentService;
 import org.factoriaf5.project_inside_out.utils.InputValidator;
+import org.factoriaf5.project_inside_out.utils.MomentExporter;
 import org.factoriaf5.project_inside_out.views.ConsoleMenu;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +29,8 @@ public class MomentController {
                 case 3 -> deleteMoment();
                 case 4 -> filterMoments();
                 case 5 -> exitApplication();
+                case 6 -> exportMoments();
+
                 default -> menu.printMessage("Opción inválida. Por favor, intenta de nuevo.");
             }
         }
@@ -163,4 +166,17 @@ public class MomentController {
             default -> menu.printError("Opción inválida.");
         }
     }
+
+    private void exportMoments() {
+        String filename = menu.readLine("Ingrese el nombre del archivo CSV: ").trim();
+
+        if (!filename.toLowerCase().endsWith(".csv")) {
+            filename += ".csv";
+        }
+
+        List<Moment> allMoments = service.getAllMoments();
+        MomentExporter.exportToCSV(allMoments, filename);
+        menu.printMessage("Momentos exportados correctamente en: " + filename);
+    }
+
 }
