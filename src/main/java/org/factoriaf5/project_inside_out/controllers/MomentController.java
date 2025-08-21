@@ -1,13 +1,12 @@
 package org.factoriaf5.project_inside_out.controllers;
 
 import org.factoriaf5.project_inside_out.models.MomentDTO;
-import org.factoriaf5.project_inside_out.models.Moment;
+import org.factoriaf5.project_inside_out.models.Emotion;
 import org.factoriaf5.project_inside_out.services.MomentService;
 import org.factoriaf5.project_inside_out.utils.InputValidator;
-import org.factoriaf5.project_inside_out.utils.MomentExporter;
 import org.factoriaf5.project_inside_out.views.ConsoleMenu;
+
 import java.time.LocalDate;
-import java.util.List;
 
 public class MomentController {
     private final ConsoleMenu menu;
@@ -20,163 +19,112 @@ public class MomentController {
 
     public void run() {
         while (true) {
-            menu.showMainMenu();
+            menu.showMomentMenu();
             int option = menu.readInt();
-
             switch (option) {
                 case 1 -> addMoment();
                 case 2 -> showAllMoments();
                 case 3 -> deleteMoment();
-                case 4 -> filterMoments();
-                case 5 -> exitApplication();
-                case 6 -> exportMoments();
-
-                default -> menu.printMessage("Opción inválida. Por favor, intenta de nuevo.");
+                case 4 -> filterMoments(); // CORREGIDO: Ahora mostrará opciones
+                case 5 -> exportMoments();
+                case 6 -> { return; }
+                default -> menu.printError("Opción inválida.");
             }
         }
     }
 
     private void addMoment() {
-        try {
-            String title = menu.readLine("Ingrese el título: ");
-            LocalDate eventDate = getValidDate();
-            String description = menu.readLine("Ingrese la descripción: ");
-            int emotionOption = getValidEmotion();
+        String title = menu.readLine("Ingrese el título: ");
+        LocalDate date = getValidDate();
+        String description = menu.readLine("Ingrese la descripción: ");
+        int emotionOption = getValidEmotion();
+        boolean isGood = getValidMomentType();
 
-            boolean isGood = getValidMomentType();
+        Emotion emotion = Emotion.fromOption(emotionOption);
 
-            MomentDTO dto = new MomentDTO(title, description, emotionOption,
-                    eventDate.format(InputValidator.getFormatter()), isGood);
+        MomentDTO dto = new MomentDTO(title, description, emotion, date, isGood);
+        service.addMoment(dto);
+        menu.printMessage("Momento añadido correctamente.");
+    }
 
-            service.addMoment(dto);
+    private LocalDate getValidDate() {
+        LocalDate date;
+        do {
+            String input = menu.readLine("Ingrese la fecha (dd/mm/yyyy): ");
+            date = InputValidator.parseDate(input);
+            if (date == null) menu.printError("Formato inválido.");
+        } while (date == null);
+        return date;
+    }
 
-            menu.printMessage("Momento vivido añadido correctamente.");
-        } catch (Exception e) {
-            menu.printError("Error al añadir el momento: " + e.getMessage());
-        }
+    private int getValidEmotion() {
+        menu.printEmotionMenu();
+        int option;
+        do {
+            option = menu.readInt("Seleccione una emoción: ");
+            if (!InputValidator.isValidEmotionOption(option)) menu.printError("Debe estar entre 1 y 10.");
+        } while (!InputValidator.isValidEmotionOption(option));
+        return option;
     }
 
     private boolean getValidMomentType() {
         int option;
         do {
             option = menu.readInt("¿Es un buen momento (1) o un mal momento (2)?: ");
-            if (option != 1 && option != 2) {
-                menu.printError("Debe introducir 1 (bueno) o 2 (malo).");
-            }
+            if (option != 1 && option != 2) menu.printError("Debe ser 1 o 2.");
         } while (option != 1 && option != 2);
         return option == 1;
     }
 
-    private void deleteMoment() {
-        try {
-            int id = menu.readInt("Ingresa el identificador del momento: ");
-
-            boolean exists = service.getAllMoments().stream()
-                    .anyMatch(moment -> moment.getId() == id);
-
-            if (!exists) {
-                menu.printError("No existe ningún momento con el ID: " + id);
-                return;
-            }
-
-            service.deleteMoment(id);
-            menu.printMessage("Momento vivido eliminado correctamente.");
-        } catch (Exception e) {
-            menu.printError("Error al eliminar el momento: " + e.getMessage());
-        }
-    }
-
-    private LocalDate getValidDate() {
-        LocalDate eventDate;
-        do {
-            String dateInput = menu.readLine("Ingresa la fecha (dd/mm/yyyy): ");
-            eventDate = InputValidator.parseDate(dateInput);
-            if (eventDate == null) {
-                menu.printError("Formato de fecha inválido. Intenta de nuevo (dd/mm/yyyy).");
-            }
-        } while (eventDate == null);
-        return eventDate;
-    }
-
-    private int getValidEmotion() {
-        menu.printEmotionMenu();
-        int emotionOption;
-        do {
-            emotionOption = menu.readInt("Ingrese su opción: ");
-            if (!InputValidator.isValidEmotionOption(emotionOption)) {
-                menu.printError("Opción inválida. Introduzca un número entre 1 y 10.");
-            }
-        } while (!InputValidator.isValidEmotionOption(emotionOption));
-        return emotionOption;
-    }
-
     private void showAllMoments() {
-        List<Moment> moments = service.getAllMoments();
-        menu.printMoments(moments);
+        menu.printMoments(service.getAllMoments());
     }
 
-    private void exitApplication() {
-        menu.printMessage("¡Hasta la próxima!");
-        if ("test".equals(System.getProperty("environment"))) {
-            throw new RuntimeException("System.exit() called");
-        }
-        System.exit(0);
+    private void deleteMoment() {
+        int id = menu.readInt("Ingresa el ID del momento: ");
+        service.deleteMoment(id);
+        menu.printMessage("Momento eliminado correctamente.");
     }
 
+    // CORREGIDO: Ahora muestra opciones de filtrado
     private void filterMoments() {
-        menu.printMessage("Filtrar por ...:");
-        menu.printMessage("1. Emoción");
-        menu.printMessage("2. Fecha");
-        menu.printMessage("3. Buenos/Malos");
-
-        int filterOption = menu.readInt("Ingrese una opción: ");
-
+        menu.showFilterMenu(); // Nuevo método en ConsoleMenu
+        int filterOption = menu.readInt();
+        
         switch (filterOption) {
-            case 1 -> {
-                menu.printEmotionMenu();
-                int emotionOption = getValidEmotion();
-                List<Moment> filteredByEmotion = service.getMomentsByEmotion(emotionOption);
-                menu.printMoments(filteredByEmotion);
-            }
-            case 2 -> {
-                int month;
-                do {
-                    month = menu.readInt("Ingrese el mes (1-12): ");
-                    if (month < 1 || month > 12) {
-                        menu.printError("Mes inválido. Debe estar entre 1 y 12.");
-                    }
-                } while (month < 1 || month > 12);
-
-                int year;
-                do {
-                    year = menu.readInt("Ingrese el año (yyyy): ");
-                    if (String.valueOf(year).length() != 4) {
-                        menu.printError("Año inválido. Debe tener 4 dígitos.");
-                    }
-                } while (String.valueOf(year).length() != 4);
-
-                List<Moment> filteredByMonthYear = service.getMomentsByMonthYear(month, year);
-                menu.printMoments(filteredByMonthYear);
-            }
-            case 3 -> {
-                boolean isGood = getValidMomentType();
-                List<Moment> filtered = service.getMomentsByType(isGood);
-                menu.printMoments(filtered);
-            }
+            case 1 -> filterByEmotion();
+            case 2 -> filterByDate();
+            case 3 -> filterByType();
+            case 4 -> { return; } // Volver
             default -> menu.printError("Opción inválida.");
         }
     }
-
-    private void exportMoments() {
-        String filename = menu.readLine("Ingrese el nombre del archivo CSV: ").trim();
-
-        if (!filename.toLowerCase().endsWith(".csv")) {
-            filename += ".csv";
-        }
-
-        List<Moment> allMoments = service.getAllMoments();
-        MomentExporter.exportToCSV(allMoments, filename);
-        menu.printMessage("Momentos exportados correctamente en: " + filename);
+    
+    private void filterByEmotion() {
+        int emotionOption = getValidEmotion();
+        Emotion emotion = Emotion.fromOption(emotionOption);
+        menu.printMoments(service.filterByEmotion(emotion));
+    }
+    
+    private void filterByDate() {
+        LocalDate date = getValidDate();
+        menu.printMoments(service.filterByDate(date));
+    }
+    
+    private void filterByType() {
+        boolean isGood = getValidMomentType();
+        menu.printMoments(service.filterByType(isGood));
     }
 
+    private void exportMoments() {
+        String filename = menu.readLine("Nombre del archivo CSV: ");
+        if (!filename.toLowerCase().endsWith(".csv")) filename += ".csv";
+        
+        try {
+            service.exportToCSV(filename);
+            menu.printMessage("Exportado correctamente en: exports/" + filename);
+        } catch (Exception e) {
+            menu.printError("Error al exportar: " + e.getMessage());
+        }
+    }
 }

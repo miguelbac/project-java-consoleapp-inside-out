@@ -4,16 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Moment {
-    private final int id;
-    private final String title;
-    private final String description;
-    private final Emotion emotion;
-    private final LocalDate eventDate;
-    private final LocalDateTime createdAt;
-    private final LocalDateTime updatedAt;
-    private final boolean isGood; // <-- nuevo campo
+    private int id;
+    private String title;
+    private String description;
+    private Emotion emotion;
+    private LocalDate eventDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean isGood;
 
-    public Moment(int id, String title, String description, Emotion emotion, LocalDate eventDate,
+    // Constructor con ID (para uso interno)
+    public Moment(int id, String title, String description, Emotion emotion, LocalDate eventDate, 
                   LocalDateTime createdAt, LocalDateTime updatedAt, boolean isGood) {
         this.id = id;
         this.title = title;
@@ -25,39 +26,27 @@ public class Moment {
         this.isGood = isGood;
     }
 
+    // Constructor sin ID (para crear nuevos momentos)
     public Moment(String title, String description, Emotion emotion, LocalDate eventDate, boolean isGood) {
-        this(0, title, description, emotion, eventDate, null, null, isGood);
+        this.title = title;
+        this.description = description;
+        this.emotion = emotion;
+        this.eventDate = eventDate;
+        this.isGood = isGood;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
-    public boolean isGood() {
-        return isGood;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Emotion getEmotion() {
-        return emotion;
-    }
-
-    public LocalDate getEventDate() {
-        return eventDate;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+    // Getters
+    public int getId() { return id; }
+    public String getTitle() { return title; }
+    public String getDescription() { return description; }
+    public Emotion getEmotion() { return emotion; }
+    public LocalDate getEventDate() { return eventDate; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public boolean isGood() { return isGood; }
+    
+    // Setter para ID (usado por el repository)
+    public void setId(int id) { this.id = id; }
 }

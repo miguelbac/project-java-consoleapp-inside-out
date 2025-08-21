@@ -1,11 +1,15 @@
 package org.factoriaf5.project_inside_out.services;
 
-import org.factoriaf5.project_inside_out.mappers.MomentMapper;
 import org.factoriaf5.project_inside_out.models.Moment;
 import org.factoriaf5.project_inside_out.models.MomentDTO;
+import org.factoriaf5.project_inside_out.models.Emotion;
 import org.factoriaf5.project_inside_out.repositories.MomentRepository;
+import org.factoriaf5.project_inside_out.mappers.MomentMapper;
+import org.factoriaf5.project_inside_out.utils.MomentExporter;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MomentService {
     private final MomentRepository repository;
@@ -27,23 +31,27 @@ public class MomentService {
         repository.deleteById(id);
     }
 
-    public List<Moment> getMomentsByEmotion(int emotionOption) {
+    public List<Moment> filterByEmotion(Emotion emotion) {
         return repository.findAll().stream()
-                .filter(moment -> moment.getEmotion().ordinal() + 1 == emotionOption)
-                .toList();
+                .filter(m -> m.getEmotion() == emotion)
+                .collect(Collectors.toList());
     }
-
-    public List<Moment> getMomentsByMonthYear(int month, int year) {
+    
+    // NUEVOS: Métodos de filtrado adicionales
+    public List<Moment> filterByDate(LocalDate date) {
         return repository.findAll().stream()
-                .filter(moment -> moment.getEventDate().getMonthValue() == month
-                        && moment.getEventDate().getYear() == year)
-                .toList();
+                .filter(m -> m.getEventDate().equals(date))
+                .collect(Collectors.toList());
     }
-
-    public List<Moment> getMomentsByType(boolean isGood) {
+    
+    public List<Moment> filterByType(boolean isGood) {
         return repository.findAll().stream()
-                .filter(moment -> moment.isGood() == isGood)
-                .toList();
+                .filter(m -> m.isGood() == isGood)
+                .collect(Collectors.toList());
     }
-
+    
+    public void exportToCSV(String filename) {
+        List<Moment> moments = getAllMoments();
+        MomentExporter.exportToCSV(moments, filename);
+    }
 }

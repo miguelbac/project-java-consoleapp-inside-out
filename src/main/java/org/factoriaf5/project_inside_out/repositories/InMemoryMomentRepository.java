@@ -15,8 +15,13 @@ public class InMemoryMomentRepository implements MomentRepository {
 
     @Override
     public Moment save(Moment moment) {
+        // Asignar ID si no lo tiene
+        if (moment.getId() == 0) {
+            moment.setId(counter++);
+        }
+        
         Moment newMoment = new Moment(
-            counter++,
+            moment.getId(),
             moment.getTitle(),
             moment.getDescription(),
             moment.getEmotion(),
@@ -37,5 +42,10 @@ public class InMemoryMomentRepository implements MomentRepository {
     @Override
     public void deleteById(int id) {
         db.deleteById(id);
+    }
+    
+    @Override
+    public int getNextId() {
+        return counter;
     }
 }

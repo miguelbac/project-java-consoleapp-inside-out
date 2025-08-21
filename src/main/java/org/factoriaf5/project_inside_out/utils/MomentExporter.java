@@ -28,7 +28,7 @@ public class MomentExporter {
                             moment.getId(),
                             escapeCsv(moment.getTitle()),
                             escapeCsv(moment.getDescription()),
-                            moment.getEmotion(),
+                            moment.getEmotion().getDisplayName(), // FIX: usar getDisplayName()
                             moment.getEventDate(),
                             moment.isGood() ? "BUENO" : "MALO"
                     ));
