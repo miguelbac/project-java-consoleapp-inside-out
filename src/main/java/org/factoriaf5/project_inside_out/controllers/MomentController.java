@@ -25,7 +25,7 @@ public class MomentController {
                 case 1 -> addMoment();
                 case 2 -> showAllMoments();
                 case 3 -> deleteMoment();
-                case 4 -> filterMoments(); // CORREGIDO: Ahora mostrará opciones
+                case 4 -> filterMoments();
                 case 5 -> exportMoments();
                 case 6 -> { return; }
                 default -> menu.printError("Opción inválida.");
@@ -86,16 +86,15 @@ public class MomentController {
         menu.printMessage("Momento eliminado correctamente.");
     }
 
-    // CORREGIDO: Ahora muestra opciones de filtrado
     private void filterMoments() {
-        menu.showFilterMenu(); // Nuevo método en ConsoleMenu
+        menu.showFilterMenu();
         int filterOption = menu.readInt();
         
         switch (filterOption) {
             case 1 -> filterByEmotion();
             case 2 -> filterByDate();
             case 3 -> filterByType();
-            case 4 -> { return; } // Volver
+            case 4 -> { return; }
             default -> menu.printError("Opción inválida.");
         }
     }

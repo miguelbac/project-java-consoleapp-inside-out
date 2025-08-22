@@ -46,7 +46,7 @@ public class CsvMovieRepository implements MovieRepository {
         List<Movie> movies = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            br.readLine(); // saltar cabecera
+            br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",", -1);
                 if (parts.length >= 6) {
