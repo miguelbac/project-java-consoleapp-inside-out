@@ -4,13 +4,33 @@
 
 ## 📖 Descripción  
 
-**Project Inside Out** es una aplicación de consola en Java que permite registrar, consultar, eliminar y filtrar momentos vividos, cada uno asociado a una emoción y una fecha.  
+Aplicación de consola en **Java** que permite gestionar un diario de **momentos personales** y una colección de **películas**, asociando cada entrada a una emoción.  
 
-**Funcionalidades principales:**  
-- Añadir nuevos momentos con título, descripción, emoción y fecha.  
-- Listar todos los momentos registrados.  
-- Eliminar momentos por su identificador.  
-- Filtrar por emoción o por fecha.  
+## 🚀 Funcionalidades principales
+- **Gestión de momentos**
+  - Añadir momentos con título, descripción, emoción, fecha y tipo (bueno/malo).
+  - Listar todos los momentos guardados.
+  - Eliminar momentos por ID.
+  - Filtrar momentos por emoción, fecha o tipo.
+  - Exportar momentos a CSV.
+
+- **Gestión de películas**
+  - Añadir películas con ID de IMDB, título, géneros, emoción y año de estreno.
+  - Listar todas las películas.
+  - Eliminar películas por IMDB Id.
+  - Filtrar películas por género.
+  - Persistencia en CSV.
+
+## 🏗️ Arquitectura
+El proyecto sigue una estructura modular inspirada en **Clean Architecture**:
+- **controllers** → Controladores de la lógica de flujo.
+- **services** → Lógica de negocio.
+- **repositories** → Acceso a datos (CSV o memoria).
+- **models** → Entidades y DTOs.
+- **views** → Interfaz de usuario por consola.
+- **utils** → Utilidades (validaciones, exportaciones).
+- **mappers** → Conversión entre DTOs y modelos.
+
 
 ---
 
