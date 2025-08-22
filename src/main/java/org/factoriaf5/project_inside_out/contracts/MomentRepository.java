@@ -1,4 +1,4 @@
-package org.factoriaf5.project_inside_out.repositories;
+package org.factoriaf5.project_inside_out.contracts;
 
 import org.factoriaf5.project_inside_out.models.Moment;
 import java.util.List;
