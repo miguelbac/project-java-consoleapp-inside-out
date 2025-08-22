@@ -1,5 +1,6 @@
 package org.factoriaf5.project_inside_out.repositories;
 
+import org.factoriaf5.project_inside_out.contracts.MovieRepository;
 import org.factoriaf5.project_inside_out.models.Emotion;
 import org.factoriaf5.project_inside_out.models.Movie;
 

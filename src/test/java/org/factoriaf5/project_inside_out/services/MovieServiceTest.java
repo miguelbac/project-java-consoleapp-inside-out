@@ -1,96 +1,67 @@
 package org.factoriaf5.project_inside_out.services;
 
-import org.factoriaf5.project_inside_out.models.Emotion;
-import org.factoriaf5.project_inside_out.models.Movie;
-import org.factoriaf5.project_inside_out.models.MovieDTO;
-import org.factoriaf5.project_inside_out.repositories.MovieRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.factoriaf5.project_inside_out.models.*;
+import org.factoriaf5.project_inside_out.repositories.CsvMovieRepository;
+import org.junit.jupiter.api.*;
 
-import java.util.Arrays;
+import java.io.File;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class MovieServiceTest {
 
-    private MovieRepository repository;
-    private MovieService movieService;
-
-    private MovieDTO movieDTO;
-    private Movie movie;
+    private MovieService service;
 
     @BeforeEach
     void setUp() {
-        repository = mock(MovieRepository.class);
-        movieService = new MovieService(repository);
-
-        movieDTO = new MovieDTO(
-            "tt1234567",
-            "Test Movie",
-            Arrays.asList("Action", "Adventure"),
-            Emotion.ALEGRIA,
-            2023
-        );
-
-        movie = new Movie(
-            "tt1234567",
-            "Test Movie",
-            Arrays.asList("Action", "Adventure"),
-            Emotion.ALEGRIA,
-            2023,
-            null
-        );
+        // Limpiamos carpeta exports antes de cada test
+        File folder = new File("exports");
+        if (folder.exists()) {
+            for (File f : folder.listFiles()) {
+                f.delete();
+            }
+        }
+        service = new MovieService(new CsvMovieRepository());
     }
 
     @Test
-    void testAddMovie_ShouldCallRepositorySave() {
-        // Arrange
-        when(repository.save(any(Movie.class))).thenReturn(movie);
+    void addMovie_ShouldSaveFromDTO() {
+        MovieDTO dto = new MovieDTO("tt010", "Matrix", List.of("Sci-Fi"), Emotion.MIEDO, 1999);
 
-        // Act
-        Movie result = movieService.addMovie(movieDTO);
+        Movie movie = service.addMovie(dto);
 
-        // Assert
-        assertNotNull(result);
-        verify(repository, times(1)).save(any(Movie.class));
+        assertNotNull(movie);
+        assertEquals("Matrix", movie.getTitle());
     }
 
     @Test
-    void testGetAllMovies_ShouldReturnAllMovies() {
-        // Arrange
-        List<Movie> expectedMovies = Arrays.asList(movie);
-        when(repository.findAll()).thenReturn(expectedMovies);
+    void getAllMovies_ShouldReturnAllSaved() {
+        service.addMovie(new MovieDTO("tt001", "Inception", List.of("Sci-Fi"), Emotion.ANSIEDAD, 2010));
+        service.addMovie(new MovieDTO("tt002", "Shrek", List.of("Animación"), Emotion.ALEGRIA, 2001));
 
-        // Act
-        List<Movie> result = movieService.getAllMovies();
+        List<Movie> movies = service.getAllMovies();
 
-        // Assert
-        assertEquals(1, result.size());
-        verify(repository, times(1)).findAll();
+        assertEquals(2, movies.size());
     }
 
     @Test
-    void testDeleteMovie_ShouldCallRepositoryDelete() {
-        // Act
-        movieService.deleteMovie("tt1234567");
+    void deleteMovie_ShouldRemoveMovieById() {
+        service.addMovie(new MovieDTO("tt003", "Avatar", List.of("Aventura"), Emotion.ALEGRIA, 2009));
 
-        // Assert
-        verify(repository, times(1)).deleteById("tt1234567");
+        service.deleteMovie("tt003");
+
+        assertTrue(service.getAllMovies().isEmpty());
     }
 
     @Test
-    void testFilterByGenre_ShouldReturnFilteredMovies() {
-        // Arrange
-        List<Movie> expectedMovies = Arrays.asList(movie);
-        when(repository.findByGenre("Action")).thenReturn(expectedMovies);
+    void filterByGenre_ShouldReturnCorrectMovies() {
+        service.addMovie(new MovieDTO("tt004", "Titanic", List.of("Drama", "Romance"), Emotion.TRISTEZA, 1997));
+        service.addMovie(new MovieDTO("tt005", "Up", List.of("Animación", "Aventura"), Emotion.NOSTALGIA, 2009));
 
-        // Act
-        List<Movie> result = movieService.filterByGenre("Action");
+        List<Movie> dramas = service.filterByGenre("drama");
 
-        // Assert
-        assertEquals(1, result.size());
-        verify(repository, times(1)).findByGenre("Action");
+        assertEquals(1, dramas.size());
+        assertEquals("Titanic", dramas.get(0).getTitle());
     }
 }

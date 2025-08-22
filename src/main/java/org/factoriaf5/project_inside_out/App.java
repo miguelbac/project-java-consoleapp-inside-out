@@ -1,10 +1,10 @@
 package org.factoriaf5.project_inside_out;
 
+import org.factoriaf5.project_inside_out.contracts.MomentRepository;
+import org.factoriaf5.project_inside_out.contracts.MovieRepository;
 import org.factoriaf5.project_inside_out.controllers.AppController;
 import org.factoriaf5.project_inside_out.repositories.CsvMovieRepository;
-import org.factoriaf5.project_inside_out.repositories.MovieRepository;
 import org.factoriaf5.project_inside_out.repositories.InMemoryMomentRepository;
-import org.factoriaf5.project_inside_out.repositories.MomentRepository;
 import org.factoriaf5.project_inside_out.db.MomentDB;
 import org.factoriaf5.project_inside_out.services.MovieService;
 import org.factoriaf5.project_inside_out.services.MomentService;

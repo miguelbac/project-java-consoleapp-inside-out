@@ -3,7 +3,7 @@ package org.factoriaf5.project_inside_out.services;
 import org.factoriaf5.project_inside_out.models.Moment;
 import org.factoriaf5.project_inside_out.models.MomentDTO;
 import org.factoriaf5.project_inside_out.models.Emotion;
-import org.factoriaf5.project_inside_out.repositories.MomentRepository;
+import org.factoriaf5.project_inside_out.contracts.MomentRepository;
 import org.factoriaf5.project_inside_out.mappers.MomentMapper;
 import org.factoriaf5.project_inside_out.utils.MomentExporter;
 

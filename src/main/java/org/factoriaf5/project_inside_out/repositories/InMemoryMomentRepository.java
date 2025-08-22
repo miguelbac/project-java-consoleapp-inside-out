@@ -1,5 +1,6 @@
 package org.factoriaf5.project_inside_out.repositories;
 
+import org.factoriaf5.project_inside_out.contracts.MomentRepository;
 import org.factoriaf5.project_inside_out.db.MomentDB;
 import org.factoriaf5.project_inside_out.models.Moment;
 import java.time.LocalDateTime;

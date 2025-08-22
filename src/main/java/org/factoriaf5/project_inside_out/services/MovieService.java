@@ -2,7 +2,7 @@ package org.factoriaf5.project_inside_out.services;
 
 import org.factoriaf5.project_inside_out.models.Movie;
 import org.factoriaf5.project_inside_out.models.MovieDTO;
-import org.factoriaf5.project_inside_out.repositories.MovieRepository;
+import org.factoriaf5.project_inside_out.contracts.MovieRepository;
 import org.factoriaf5.project_inside_out.mappers.MovieMapper;
 
 import java.util.List;
