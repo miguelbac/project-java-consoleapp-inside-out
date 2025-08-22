@@ -7,5 +7,5 @@ public interface MomentRepository {
     Moment save(Moment moment);
     List<Moment> findAll();
     void deleteById(int id);
-    int getNextId(); // Método faltante
+    int getNextId();
 }

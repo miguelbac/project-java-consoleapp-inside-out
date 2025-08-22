@@ -12,7 +12,7 @@ public class MovieMapper {
                 dto.getImdbId(),
                 dto.getTitle(),
                 dto.getGenres(),
-                dto.getEmotion(), // Cambio: usa getEmotion() no getEmotionOption()
+                dto.getEmotion(),
                 dto.getReleaseYear(),
                 LocalDateTime.now()
         );

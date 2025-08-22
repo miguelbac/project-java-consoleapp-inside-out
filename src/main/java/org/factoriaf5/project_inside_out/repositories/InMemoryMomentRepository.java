@@ -15,7 +15,6 @@ public class InMemoryMomentRepository implements MomentRepository {
 
     @Override
     public Moment save(Moment moment) {
-        // Asignar ID si no lo tiene
         if (moment.getId() == 0) {
             moment.setId(counter++);
         }

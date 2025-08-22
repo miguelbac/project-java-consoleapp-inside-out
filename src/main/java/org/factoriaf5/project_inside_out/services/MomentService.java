@@ -37,7 +37,6 @@ public class MomentService {
                 .collect(Collectors.toList());
     }
     
-    // NUEVOS: Métodos de filtrado adicionales
     public List<Moment> filterByDate(LocalDate date) {
         return repository.findAll().stream()
                 .filter(m -> m.getEventDate().equals(date))

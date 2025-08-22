@@ -52,7 +52,6 @@ public class ConsoleMenu {
             10. Nostalgia
             """;
 
-    // NUEVO: Menú de filtros
     private static final String FILTER_MENU = """
             --- Filtrar Momentos ---
             1. Por emoción
@@ -64,7 +63,6 @@ public class ConsoleMenu {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    // ===== MENÚS =====
     public void showMainMenu() {
         System.out.println(MAIN_MENU);
     }
@@ -81,12 +79,10 @@ public class ConsoleMenu {
         System.out.println(EMOTION_MENU);
     }
 
-    // NUEVO: Menú de filtros
     public void showFilterMenu() {
         System.out.println(FILTER_MENU);
     }
 
-    // ===== INPUTS =====
     public int readInt() {
         return readInt("");
     }
@@ -107,7 +103,6 @@ public class ConsoleMenu {
         return scanner.nextLine().trim();
     }
 
-    // ===== SALIDAS =====
     public void printMessage(String message) {
         System.out.println(message);
     }
@@ -116,7 +111,6 @@ public class ConsoleMenu {
         System.err.println("Error: " + error);
     }
 
-    // ===== IMPRESIÓN DE DATOS =====
     public void printMoments(List<Moment> moments) {
         if (moments.isEmpty()) {
             System.out.println("No hay momentos guardados.");

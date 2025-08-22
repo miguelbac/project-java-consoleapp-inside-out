@@ -13,7 +13,6 @@ public class Moment {
     private LocalDateTime updatedAt;
     private boolean isGood;
 
-    // Constructor con ID (para uso interno)
     public Moment(int id, String title, String description, Emotion emotion, LocalDate eventDate, 
                   LocalDateTime createdAt, LocalDateTime updatedAt, boolean isGood) {
         this.id = id;
@@ -26,7 +25,6 @@ public class Moment {
         this.isGood = isGood;
     }
 
-    // Constructor sin ID (para crear nuevos momentos)
     public Moment(String title, String description, Emotion emotion, LocalDate eventDate, boolean isGood) {
         this.title = title;
         this.description = description;
@@ -37,7 +35,6 @@ public class Moment {
         this.updatedAt = LocalDateTime.now();
     }
 
-    // Getters
     public int getId() { return id; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }
@@ -47,6 +44,5 @@ public class Moment {
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public boolean isGood() { return isGood; }
     
-    // Setter para ID (usado por el repository)
     public void setId(int id) { this.id = id; }
 }

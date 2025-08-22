@@ -6,7 +6,7 @@ public class MomentDTO {
     private String title;
     private String description;
     private Emotion emotion;
-    private LocalDate eventDate; // Cambio: LocalDate en lugar de String
+    private LocalDate eventDate;
     private boolean isGood;
 
     public MomentDTO(String title, String description, Emotion emotion, LocalDate eventDate, boolean isGood) {

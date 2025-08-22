@@ -50,7 +50,6 @@ public class CsvMovieRepository implements MovieRepository {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",", -1);
                 if (parts.length >= 6) {
-                    // Limpiar comillas de los campos
                     String title = parts[1].replaceAll("^\"|\"$", "");
                     String genresStr = parts[2].replaceAll("^\"|\"$", "");
                     List<String> genres = List.of(genresStr.split(";"));
@@ -77,7 +76,6 @@ public class CsvMovieRepository implements MovieRepository {
                 .filter(m -> !m.getImdbId().equals(imdbId))
                 .collect(Collectors.toList());
         
-        // Reescribir el archivo
         try (FileWriter writer = new FileWriter(file)) {
             writer.write("ImdbId,Título,Géneros,Emoción,Año,FechaCreación\n");
             for (Movie m : movies) {
@@ -85,7 +83,7 @@ public class CsvMovieRepository implements MovieRepository {
                         m.getImdbId(),
                         escapeCsv(m.getTitle()),
                         escapeCsv(String.join(";", m.getGenres())),
-                        m.getEmotion().getOption(), // CORREGIDO: usar getOption() no el objeto
+                        m.getEmotion().getOption(),
                         m.getReleaseYear(),
                         m.getCreatedAt()));
             }

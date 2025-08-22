@@ -40,7 +40,6 @@ public class MovieController {
         String title = menu.readLine("Título: ");
         String[] genresArray = menu.readLine("Géneros (separados por coma): ").split(",");
         
-        // FIX: Limpiar espacios en géneros
         List<String> genres = Arrays.stream(genresArray)
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
